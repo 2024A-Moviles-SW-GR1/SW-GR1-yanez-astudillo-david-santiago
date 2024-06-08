@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "361881138928",
+    "project_id": "dsya-swgr1-2024a",
+    "storage_bucket": "dsya-swgr1-2024a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:361881138928:android:95ab2192dcf3319dfcf435",
+        "android_client_info": {
+          "package_name": "com.example.a2024aswgr1vaes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-iK7BN0H0CRsoEKA9eD053I1DuxEwE0I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
