@@ -9,6 +9,7 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/saludo"
@@ -17,5 +18,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_ciclo_vida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:text="C. Vida"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.517" />
+
+    <Button
+        android:id="@+id/btn_ir_list_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="L. View"
+        app:layout_constraintEnd_toEndOf="@+id/btn_ciclo_vida"
+        app:layout_constraintStart_toStartOf="@+id/btn_ciclo_vida"
+        tools:layout_editor_absoluteY="411dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
