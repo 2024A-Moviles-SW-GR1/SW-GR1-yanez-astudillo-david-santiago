@@ -6,4 +6,6 @@
         <item>Martes</item>
         <item>Miercoles</item>
     </string-array>
+    <string name="title_activity_cintent_explicito_parametros">CIntentExplicitoParametros</string>
+    <string name="title_activity_ggoole_maps_inicio">GGooleMapsInicio</string>
 </resources>
