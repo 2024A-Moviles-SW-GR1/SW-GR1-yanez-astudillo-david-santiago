@@ -6,5 +6,6 @@ data class Book(
     var id: Int,
     var title: String,
     var fechaPublicacion: String,
-    var genero: String
+    var genero: String,
+    var authorid: Int
 )

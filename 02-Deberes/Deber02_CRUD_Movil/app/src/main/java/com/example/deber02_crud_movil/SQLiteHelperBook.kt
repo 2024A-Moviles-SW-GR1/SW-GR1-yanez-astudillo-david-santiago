@@ -41,13 +41,13 @@ class SQLiteHelperBook(context: Context) : SQLiteOpenHelper(context, DATABASE_NA
         onCreate(db)
     }
 
-    fun addBook(book: Book, authorId: Int) {
+    fun addBook(book: Book) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(KEY_BOOK_TITLE, book.title)
             put(KEY_BOOK_PUBLICATION_DATE, book.fechaPublicacion)
             put(KEY_BOOK_GENRE, book.genero)
-            put(KEY_BOOK_AUTHOR_ID, authorId)
+            put(KEY_BOOK_AUTHOR_ID, book.authorid)
         }
 
         db.insert(TABLE_BOOKS, null, values)
@@ -70,7 +70,8 @@ class SQLiteHelperBook(context: Context) : SQLiteOpenHelper(context, DATABASE_NA
                 id = cursor.getInt(cursor.getColumnIndex(KEY_BOOK_ID)),
                 title = cursor.getString(cursor.getColumnIndex(KEY_BOOK_TITLE)),
                 fechaPublicacion = cursor.getString(cursor.getColumnIndex(KEY_BOOK_PUBLICATION_DATE)),
-                genero = cursor.getString(cursor.getColumnIndex(KEY_BOOK_GENRE))
+                genero = cursor.getString(cursor.getColumnIndex(KEY_BOOK_GENRE)),
+                authorid = cursor.getInt(cursor.getColumnIndex(KEY_BOOK_AUTHOR_ID))
             )
         }
         cursor.close()
@@ -88,7 +89,7 @@ class SQLiteHelperBook(context: Context) : SQLiteOpenHelper(context, DATABASE_NA
             // Uso de query() en lugar de rawQuery() para mejorar la legibilidad y seguridad
             cursor = db.query(
                 TABLE_BOOKS,
-                arrayOf(KEY_BOOK_ID, KEY_BOOK_TITLE, KEY_BOOK_PUBLICATION_DATE, KEY_BOOK_GENRE),
+                arrayOf(KEY_BOOK_ID, KEY_BOOK_TITLE, KEY_BOOK_PUBLICATION_DATE, KEY_BOOK_GENRE, KEY_BOOK_AUTHOR_ID),
                 "$KEY_BOOK_AUTHOR_ID = ?",
                 arrayOf(authorId.toString()),
                 null, null, null
@@ -100,7 +101,8 @@ class SQLiteHelperBook(context: Context) : SQLiteOpenHelper(context, DATABASE_NA
                         id = cursor.getInt(cursor.getColumnIndex(KEY_BOOK_ID)),
                         title = cursor.getString(cursor.getColumnIndex(KEY_BOOK_TITLE)),
                         fechaPublicacion = cursor.getString(cursor.getColumnIndex(KEY_BOOK_PUBLICATION_DATE)),
-                        genero = cursor.getString(cursor.getColumnIndex(KEY_BOOK_GENRE))
+                        genero = cursor.getString(cursor.getColumnIndex(KEY_BOOK_GENRE)),
+                        authorid = authorId
                     )
                     books.add(book)
                 } while (cursor.moveToNext())
@@ -130,7 +132,8 @@ class SQLiteHelperBook(context: Context) : SQLiteOpenHelper(context, DATABASE_NA
                     id = cursor.getInt(cursor.getColumnIndex(KEY_BOOK_ID)),
                     title = cursor.getString(cursor.getColumnIndex(KEY_BOOK_TITLE)),
                     fechaPublicacion = cursor.getString(cursor.getColumnIndex(KEY_BOOK_PUBLICATION_DATE)),
-                    genero = cursor.getString(cursor.getColumnIndex(KEY_BOOK_GENRE))
+                    genero = cursor.getString(cursor.getColumnIndex(KEY_BOOK_GENRE)),
+                    authorid = cursor.getInt(cursor.getColumnIndex(KEY_BOOK_AUTHOR_ID))
                 )
                 list.add(book)
             } while (cursor.moveToNext())

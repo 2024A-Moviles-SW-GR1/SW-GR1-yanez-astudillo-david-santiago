@@ -17,10 +17,12 @@ class BookAdapter(context: Context, books: List<Book>) : ArrayAdapter<Book>(cont
 
         val book = getItem(position) ?: return itemView!!
 
+        val idTextView = itemView?.findViewById<TextView>(R.id.tv_book_id)
         val titleTextView = itemView?.findViewById<TextView>(R.id.tv_book_title)
         val dateTextView = itemView?.findViewById<TextView>(R.id.tv_book_publication_date)
         val genreTextView = itemView?.findViewById<TextView>(R.id.tv_book_genre)
 
+        idTextView?.text = book.id.toString()
         titleTextView?.text = book.title
         dateTextView?.text = book.fechaPublicacion
         genreTextView?.text = book.genero

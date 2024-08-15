@@ -23,6 +23,7 @@ class CreateUpdateBook : AppCompatActivity() {
         }
 
         val isCreating = intent.getBooleanExtra("IS_CREATING", true)
+        val authorIdFromIntent = intent.getIntExtra("AUTHOR_ID", -1)
 
         val idEditText = findViewById<EditText>(R.id.input_id_book)
         val titleEditText = findViewById<EditText>(R.id.input_titulo_book)
@@ -38,12 +39,13 @@ class CreateUpdateBook : AppCompatActivity() {
                 id = idEditText.text.toString().toInt(),
                 title = titleEditText.text.toString(),
                 fechaPublicacion = publicationDateEditText.text.toString(),  // Ensure date format is correct
-                genero = genreEditText.text.toString()
+                genero = genreEditText.text.toString(),
+                authorid = authorIdFromIntent
             )
 
             if (isCreating) { // VER POR QUE NO SE ESTÁN CREANDO LOS LIBROSSS-----------
                 // Create a new book
-                db.addBook(book, intent.getIntExtra("AUTHOR_ID", 0))  // Pass the correct author ID
+                db.addBook(book)  // Pass the correct author ID
                 Toast.makeText(this, "Libro creado con éxito.", Toast.LENGTH_SHORT).show()
             } else {
                 // Update an existing book
@@ -58,10 +60,10 @@ class CreateUpdateBook : AppCompatActivity() {
         }
 
         if (!isCreating) {
-            idEditText.setText(intent.getIntExtra("BOOK_ID", -1))
+            idEditText.setText(intent.getIntExtra("BOOK_ID", -1).toString())
             titleEditText.setText(intent.getStringExtra("BOOK_TITLE"))
-            publicationDateEditText.setText(intent.getStringExtra("BOOK_PUBLICATION_DATE"))
-            genreEditText.setText(intent.getStringExtra("BOOK_GENRE"))
+            publicationDateEditText.setText(intent.getStringExtra("BOOK_FECHAPUB"))
+            genreEditText.setText(intent.getStringExtra("BOOK_GENERO"))
         }
 
         // Configurar el botón según sea crear o actualizar

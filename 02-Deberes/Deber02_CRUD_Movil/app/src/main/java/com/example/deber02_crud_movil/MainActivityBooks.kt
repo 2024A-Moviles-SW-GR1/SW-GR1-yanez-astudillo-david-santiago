@@ -43,14 +43,14 @@ class MainActivityBooks : AppCompatActivity() {
 
         val botonCrearBook = findViewById<Button>(R.id.btn_crear_book)
         botonCrearBook.setOnClickListener {
-            irActividad(CreateUpdateBook::class.java, null, true) // true para crear
+            irActividad(CreateUpdateBook::class.java, null, true, authorIdFromIntent) // true para crear
         }
 
         listView = findViewById<ListView>(R.id.lv_books)
 
 
         registerForContextMenu(listView)
-        //setupListViewListener(listView)
+        setupListViewListener(listView)
 
         setupCreateButton()
 
@@ -71,14 +71,14 @@ class MainActivityBooks : AppCompatActivity() {
     private fun setupListViewListener(listView: ListView) {
         listView.setOnItemClickListener { _, _, position, _ ->
             val selectedBook = listView.adapter.getItem(position) as Book
-            irActividad(CreateUpdateBook::class.java, selectedBook, false)
+            irActividad(CreateUpdateBook::class.java, selectedBook, false, authorIdFromIntent)
         }
     }
 
     private fun setupCreateButton() {
         val btnCrear = findViewById<Button>(R.id.btn_crear_book)
         btnCrear.setOnClickListener {
-            irActividad(CreateUpdateBook::class.java, null, true)
+            irActividad(CreateUpdateBook::class.java, null, true, authorIdFromIntent)
         }
     }
 
@@ -95,7 +95,7 @@ class MainActivityBooks : AppCompatActivity() {
             R.id.item_editar_book -> {
                 // Obtener el libro seleccionado y lanzar la actividad de edición
                 val selectedBook = listView.adapter.getItem(info.position) as Book
-                irActividad(CreateUpdateBook::class.java, selectedBook, false)
+                irActividad(CreateUpdateBook::class.java, selectedBook, false, authorIdFromIntent)
                 return true
             }
             R.id.item_eliminar_book -> {
@@ -117,6 +117,7 @@ class MainActivityBooks : AppCompatActivity() {
         return super.onContextItemSelected(item)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -144,9 +145,10 @@ class MainActivityBooks : AppCompatActivity() {
     }
 
     // Envía a CreateUpdateBooks
-    private fun irActividad(clase: Class<*>, book: Book? = null, isCreating: Boolean) {
+    private fun irActividad(clase: Class<*>, book: Book? = null, isCreating: Boolean, authorId: Int) {
         val intent = Intent(this, clase)
         intent.putExtra("IS_CREATING", isCreating)
+        intent.putExtra("AUTHOR_ID", authorIdFromIntent)
         if (!isCreating) {
             intent.putExtra("BOOK_ID", book?.id)
             intent.putExtra("BOOK_TITLE", book?.title)

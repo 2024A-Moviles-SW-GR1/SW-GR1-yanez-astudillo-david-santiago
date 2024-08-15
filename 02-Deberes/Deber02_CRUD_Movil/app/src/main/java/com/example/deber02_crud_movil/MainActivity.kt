@@ -120,6 +120,7 @@ class MainActivity : AppCompatActivity() {
         return super.onContextItemSelected(item)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -140,7 +141,7 @@ class MainActivity : AppCompatActivity() {
     private fun verLibros(clase: Class<*>, author: Author) {
         val intent = Intent(this, clase)
         intent.putExtra("AUTHOR_ID", author.id)
-        startActivity(intent)
+        startActivityForResult(intent, REQUEST_CODE_UPDATE)
     }
 
     // Envía hacia CreateUpdateAuthor
