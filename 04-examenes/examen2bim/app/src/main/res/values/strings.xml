@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Examen2_Movil</string>
+    <string name="title_activity_google_maps_inicio">GoogleMapsInicio</string>
+    <string name="title_activity_google_maps_inicio2">GoogleMapsInicio2</string>
+</resources>
